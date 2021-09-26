@@ -62,13 +62,48 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 
   </style>
+ 
 
   <script>
+    const secondHand = document.querySelector('.second-hand');
 
+    function setDate(){
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const secondsDegrees = (seconds / 60) * 360 + 90;
 
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+  }
+
+    function shoppingList(){
+      var list = ["apples","cabbage","kittens"];
+
+      return {
+        removeItem: function(name){
+          list = list.filter(item => item !== name);
+        },
+        addItem: function(item){
+          return list.push(item)
+        },
+        getList: function(){
+          return list;
+        }
+      }
+    }
+
+    var test = shoppingList();
+
+    test.addItem("oranges")
+    console.log(test.getList());
+
+  setInterval(setDate, 1000);
   </script>
 </body>
 </html>
